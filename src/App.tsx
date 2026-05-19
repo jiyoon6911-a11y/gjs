@@ -38,38 +38,43 @@ export default function App() {
   }, [switchType]);
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F] text-zinc-300 font-sans selection:bg-orange-500/30 overflow-hidden">
-      {/* Background Atmosphere */}
+    <div className="min-h-screen bg-[#FFF0F5] text-zinc-800 font-sans selection:bg-rose-200 overflow-hidden relative">
+      {/* Background Atmosphere - Kitsch & Cute */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-orange-900/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[40%] h-[40%] bg-blue-900/10 blur-[120px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-pink-200/50 blur-[100px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-200/40 blur-[100px] rounded-full" />
+        
+        {/* Floating Decorative Elements */}
+        <div className="absolute top-20 left-[15%] text-4xl opacity-20">☁️</div>
+        <div className="absolute bottom-40 right-[15%] text-4xl opacity-20">🌸</div>
+        <div className="absolute top-1/2 left-[5%] text-2xl opacity-15">✨</div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 flex flex-col items-center">
         {/* Header */}
         <header className="w-full flex justify-between items-center mb-10">
           <div className="flex items-center gap-3">
-            <div className="bg-orange-500 p-2 rounded-lg">
-              <KeyboardIcon className="text-black" size={24} />
+            <div className="bg-rose-400 p-2 rounded-2xl shadow-sm">
+              <KeyboardIcon className="text-white" size={24} />
             </div>
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-white">KEYCAP SIM</h1>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest">ASMR & Haptic Experience</p>
+              <h1 className="text-2xl font-black tracking-tight text-rose-500 italic">CAP-SIM</h1>
+              <p className="text-[10px] text-rose-300 uppercase font-black tracking-widest">Kitsch Fidget Toy</p>
             </div>
           </div>
           
           <div className="flex items-center">
-            <div className="px-4 py-1.5 rounded-full text-xs font-black bg-white text-rose-500 border-2 border-rose-200 shadow-[2px_2px_0_0_#fecdd3]">
-              KITSCH FIDGET v1.0
+            <div className="px-4 py-1.5 rounded-full text-xs font-black bg-white text-rose-400 border-2 border-rose-100 shadow-[3px_3px_0_0_#ffe4e6]">
+              모바일 진동 체험 중 💓
             </div>
           </div>
 
           <div className="flex gap-4">
             <button 
               onClick={() => setIsMuted(!isMuted)}
-              className="p-2 hover:bg-white/5 rounded-full transition-colors"
+              className="p-3 bg-white hover:bg-rose-50 rounded-2xl border-2 border-rose-100 shadow-sm transition-all"
             >
-              <Volume2 className={isMuted ? 'text-zinc-600' : 'text-zinc-300'} size={20} />
+              <Volume2 className={isMuted ? 'text-zinc-300' : 'text-rose-400'} size={20} />
             </button>
           </div>
         </header>
@@ -79,24 +84,25 @@ export default function App() {
           
           <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Switch Selection */}
-            <div className="bg-zinc-900/50 p-6 rounded-2xl border border-white/5 backdrop-blur-md md:col-span-1">
-              <h2 className="text-sm font-medium uppercase tracking-wider text-zinc-500 mb-6 flex items-center gap-2">
-                <Info size={14} /> Switch Type
+            <div className="bg-white/60 p-6 rounded-[2.5rem] border-2 border-rose-100 backdrop-blur-md md:col-span-1 shadow-xl shadow-rose-200/20">
+              <h2 className="text-xs font-black uppercase tracking-wider text-rose-400 mb-6 flex items-center gap-2">
+                <Info size={14} /> 스위치 소리 선택
               </h2>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-4">
                 {switches.map((sw) => (
                   <button
                     key={sw.type}
                     onClick={() => setSwitchType(sw.type)}
                     className={`
-                      w-full flex items-center justify-between p-4 rounded-xl transition-all
-                      border ${switchType === sw.type ? 'border-orange-500/50 bg-orange-500/5' : 'border-white/5 bg-white/5 hover:bg-white/10'}
+                      w-full flex items-center justify-between p-4 rounded-2xl transition-all
+                      border-2 ${switchType === sw.type ? 'border-rose-400 bg-white shadow-[0_4px_15px_rgba(251,113,133,0.2)] scale-105' : 'border-rose-50 bg-white/50 hover:bg-white'}
                     `}
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`w-3 h-3 rounded-full ${sw.color}`} />
+                      <div className={`w-4 h-4 rounded-full ${sw.color} ring-4 ring-rose-50`} />
                       <div className="text-left">
-                        <p className={`text-xs font-semibold ${switchType === sw.type ? 'text-white' : 'text-zinc-400'}`}>{sw.label}</p>
+                        <p className={`text-sm font-bold ${switchType === sw.type ? 'text-rose-600' : 'text-zinc-500'}`}>{sw.label}</p>
+                        <p className="text-[9px] text-zinc-400 font-medium leading-none mt-1">{sw.description}</p>
                       </div>
                     </div>
                   </button>
@@ -116,23 +122,23 @@ export default function App() {
           </div>
 
           {/* Interaction Prompt for Haptics */}
-          <div className="bg-white/5 border border-white/10 p-6 rounded-2xl max-w-lg text-center backdrop-blur-sm">
-            <p className="text-white text-xs leading-relaxed font-medium mb-2">
-              터치 시 리얼한 <span className="text-rose-400 font-bold">진동(Haptic)</span>이 느껴집니다.
+          <div className="bg-white/80 border-2 border-rose-100 p-6 rounded-[2rem] max-w-lg text-center backdrop-blur-sm shadow-xl shadow-rose-200/10">
+            <p className="text-rose-500 text-sm leading-relaxed font-black mb-2">
+              터치할 때마다 <span className="text-rose-400 underline decoration-wavy underline-offset-4">진동과 소리</span>가 함께! 🦄
             </p>
-            <p className="text-zinc-500 text-[11px] italic">
-              "키캡 장난감을 파우치에 달고 다니듯, 온라인에서 언제든 눌러보세요!"
+            <p className="text-zinc-500 text-[11px] font-medium italic">
+              "현실의 키캡 장난감을 누르는 느낌을 온라인에서 그대로 담았습니다."
             </p>
           </div>
         </main>
 
-        <footer className="mt-auto pt-24 pb-8 w-full flex flex-col items-center gap-6 border-t border-white/5">
-          <div className="flex gap-8 text-[11px] uppercase tracking-[0.2em] text-zinc-600 font-medium font-mono">
-            <a href="#" className="hover:text-orange-500 transition-colors">Documentation</a>
-            <a href="#" className="hover:text-orange-500 transition-colors">Components</a>
-            <a href="#" className="hover:text-orange-500 transition-colors">Github</a>
+        <footer className="mt-auto pt-20 pb-8 w-full flex flex-col items-center gap-6">
+          <div className="flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-rose-300">
+            <span>Mechanical ASMR</span>
+            <span>Haptic Sim</span>
+            <span>Kitsch Edition</span>
           </div>
-          <p className="text-[10px] text-zinc-700 font-mono">CREATED FOR ASMR ENTHUSIASTS © 2026</p>
+          <p className="text-[10px] text-rose-200 font-bold">PINKY FIDGET TOY © 2026</p>
         </footer>
       </div>
     </div>
