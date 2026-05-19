@@ -9,7 +9,7 @@ import { SwitchType, audioService } from './services/audioService';
 import { Volume2, Palette, Sparkles, RotateCcw, Heart } from 'lucide-react';
 
 export default function App() {
-  const [switchType, setSwitchType] = useState<SwitchType>('brown');
+  const [switchType, setSwitchType] = useState<SwitchType>('blue');
   const [isMuted, setIsMuted] = useState(false);
   const [bgColor, setBgColor] = useState('bg-[#FFF0F5]');
   
@@ -29,12 +29,6 @@ export default function App() {
   useEffect(() => {
     audioService.setMuted(isMuted);
   }, [isMuted]);
-
-  const switches: { type: SwitchType; label: string; description: string; color: string }[] = [
-    { type: 'blue', label: '청축', description: '찰깍찰깍!', color: 'bg-blue-400' },
-    { type: 'brown', label: '갈축', description: '서걱서걱!', color: 'bg-amber-800' },
-    { type: 'red', label: '적축', description: '부드러워요!', color: 'bg-rose-400' },
-  ];
 
   const bgOptions = [
     { name: 'Cherry Blossom', class: 'bg-[#FFF0F5]' },
@@ -110,21 +104,6 @@ export default function App() {
           <div className="lg:col-span-12 xl:col-span-5 flex flex-col items-center justify-center py-10 bg-white/20 rounded-[3rem] border-2 border-white/40 shadow-inner">
             <div className="scale-110 md:scale-125 mb-24 origin-center">
               <FidgetToy switchType={switchType} config={toyConfig} />
-            </div>
-            
-            <div className="w-full max-w-md bg-white/80 p-4 rounded-3xl border border-white flex justify-between items-center shadow-lg mx-6">
-                <span className="text-[11px] font-black text-rose-400 ml-2 uppercase tracking-wider">Switch Audio</span>
-                <div className="flex gap-2">
-                    {switches.map(sw => (
-                        <button
-                            key={sw.type}
-                            onClick={() => setSwitchType(sw.type)}
-                            className={`px-4 py-2 rounded-2xl text-[10px] font-black transition-all ${switchType === sw.type ? 'bg-rose-400 text-white shadow-md' : 'bg-white text-zinc-400 hover:text-rose-400'}`}
-                        >
-                            {sw.label}
-                        </button>
-                    ))}
-                </div>
             </div>
             
             <p className="mt-8 text-[11px] font-bold text-rose-300/80 animate-pulse text-center px-4">
