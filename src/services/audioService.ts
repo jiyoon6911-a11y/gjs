@@ -8,20 +8,27 @@ class KeyboardAudio {
     if (!this.ctx) {
       this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
     }
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
   }
 
-  public playPress(type: SwitchType) {
+  public async playPress(type: SwitchType) {
     this.init();
     if (!this.ctx) return;
 
     // Haptic feedback (vibration)
     if ('vibrate' in navigator) {
-      if (type === 'blue') {
-        navigator.vibrate([10, 5, 10]); // Quick double tap feel
-      } else if (type === 'red') {
-        navigator.vibrate(15); // Solid single tap
-      } else {
-        navigator.vibrate(20); // Tactile bump feel
+      try {
+        if (type === 'blue') {
+          navigator.vibrate([15, 30, 15]); // More distinct double tap
+        } else if (type === 'red') {
+          navigator.vibrate(20); 
+        } else {
+          navigator.vibrate(30); 
+        }
+      } catch (e) {
+        console.warn('Vibration blocked', e);
       }
     }
 

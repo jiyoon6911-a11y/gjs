@@ -7,11 +7,17 @@ import React, { useState, useEffect } from 'react';
 import { FidgetToy } from './components/FidgetToy';
 import { SwitchType, audioService } from './services/audioService';
 import { Keyboard as KeyboardIcon, Volume2, Info } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
+  const [hasStarted, setHasStarted] = useState(false);
   const [switchType, setSwitchType] = useState<SwitchType>('brown');
   const [isMuted, setIsMuted] = useState(false);
+
+  const startExperience = () => {
+    setHasStarted(true);
+    audioService.playPress('brown'); // Trigger initial interaction
+  };
 
   const switches: { type: SwitchType; label: string; description: string; color: string }[] = [
     { type: 'blue', label: '청축 (찰칵이)', description: '경쾌한 클릭 소리', color: 'bg-blue-400' },
@@ -39,6 +45,36 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FFF0F5] text-zinc-800 font-sans selection:bg-rose-200 overflow-hidden relative">
+      <AnimatePresence>
+        {!hasStarted && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-white/40 backdrop-blur-xl"
+          >
+            <div className="text-center p-8 bg-white rounded-[3rem] shadow-2xl border-4 border-rose-100 max-w-sm w-full mx-6">
+              <div className="text-6xl mb-6 animate-bounce">🎈</div>
+              <h2 className="text-2xl font-black text-rose-500 mb-2 italic">CAP-SIM</h2>
+              <p className="text-zinc-500 text-xs mb-8 leading-relaxed">
+                키캡 체험을 위해 화면을 터치해주세요!<br/>
+                진동과 소리가 함께 재생됩니다.
+              </p>
+              <button 
+                onClick={startExperience}
+                className="w-full bg-rose-400 hover:bg-rose-500 text-white font-black py-4 rounded-2xl shadow-[0_8px_0_0_#fb7185] active:shadow-none active:translate-y-1 transition-all"
+              >
+                체험 시작하기 💓
+              </button>
+              <p className="mt-6 text-[10px] text-zinc-400">
+                Tip: 진동이 느껴지지 않는다면<br/> 
+                <span className="font-bold text-rose-300 underline underline-offset-2">새 탭에서 열기</span>로 시도해보세요!
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Background Atmosphere - Kitsch & Cute */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-pink-200/50 blur-[100px] rounded-full" />
