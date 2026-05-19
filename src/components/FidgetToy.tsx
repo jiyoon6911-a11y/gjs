@@ -8,12 +8,6 @@ interface ToyKeycapProps {
   switchType: SwitchType;
 }
 
-interface ToyKeycapProps {
-  emoji: string;
-  color: string;
-  switchType: SwitchType;
-}
-
 const ToyKeycap: React.FC<ToyKeycapProps> = ({ emoji, color, switchType }) => {
   const [isPressed, setIsPressed] = useState(false);
 
@@ -67,16 +61,15 @@ export interface ToyConfig {
   keys: { emoji: string; color: string }[];
 }
 
-export const FidgetToy: React.FC<{ switchType: SwitchType; config: ToyConfig; isFinished?: boolean }> = ({ 
+export const FidgetToy: React.FC<{ switchType: SwitchType; config: ToyConfig }> = ({ 
   switchType, 
-  config,
-  isFinished = false 
+  config
 }) => {
   return (
     <motion.div 
       className="relative"
-      animate={isFinished ? { rotate: [0, -1, 1, 0], scale: 1.1 } : {}}
-      transition={isFinished ? { repeat: Infinity, duration: 4 } : {}}
+      animate={{ y: [0, -5, 0] }}
+      transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
     >
       {/* Kitsch Keyring Chain */}
       <div className="absolute -top-20 left-1/2 -translate-x-1/2 flex flex-col items-center">
@@ -110,15 +103,14 @@ export const FidgetToy: React.FC<{ switchType: SwitchType; config: ToyConfig; is
         </div>
       </div>
       
-      {!isFinished && (
-        <motion.div 
-          animate={{ y: [0, -10, 0] }} 
-          transition={{ repeat: Infinity, duration: 3 }}
-          className="absolute -right-12 -top-4 text-3xl opacity-80"
-        >
-          ✨
-        </motion.div>
-      )}
+      <motion.div 
+        animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }} 
+        transition={{ repeat: Infinity, duration: 3 }}
+        className="absolute -right-12 -top-4 text-3xl"
+      >
+        ✨
+      </motion.div>
     </motion.div>
   );
 };
+
