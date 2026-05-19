@@ -84,7 +84,7 @@ export default function App() {
             </div>
             <div>
               <h1 className="text-2xl font-black tracking-tight text-rose-500 italic leading-none">공작새</h1>
-              <p className="text-[10px] text-rose-300 uppercase font-black tracking-widest mt-1">나만의 키캡 만들기</p>
+              <p className="text-[10px] text-rose-300 uppercase font-black tracking-widest mt-1">온라인 키캡</p>
             </div>
           </div>
           

@@ -1,5 +1,5 @@
 {
-  "name": "공작새 - 나만의 키캡 만들기",
+  "name": "공작새 - 온라인 키캡",
   "description": "온라인으로 즐기는 리얼한 기계식 키보드 타건 체험. 다양한 스위치 사운드와 커스텀 키캡을 경험해보세요.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
